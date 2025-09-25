@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Microsoft Excel - Comandos y Funciones Básicas</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .poster {
+            width: 100%;
+            max-width: 1000px;
+            background: linear-gradient(135deg, #bbdefb 0%, #e1bee7 100%);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            padding: 35px;
+            position: relative;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.4);
+            border-radius: 15px;
+        }
+        
+        h1 {
+            color: #1b5e20;
+            font-size: 3.2rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 0px rgba(255, 255, 255, 0.5);
+        }
+        
+        .tagline {
+            color: #5a5a5a;
+            font-size: 1.3rem;
+            font-weight: 500;
+        }
+        
+        .content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+        
+        .section {
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 8px;
+            height: 100%;
+            background: linear-gradient(to bottom, #2196f3, #9c27b0);
+        }
+        
+        h2 {
+            color: #0d47a1;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px dashed #90caf9;
+            font-size: 1.6rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        h2 i {
+            color: #1565c0;
+            background: #e3f2fd;
+            padding: 10px;
+            border-radius: 50%;
+        }
+        
+        ul {
+            list-style-type: none;
+        }
+        
+        li {
+            padding: 12px 0;
+            color: #37474f;
+            position: relative;
+            padding-left: 35px;
+            border-bottom: 1px solid #e3f2fd;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        li:last-child {
+            border-bottom: none;
+        }
+        
+        li:before {
+            content: "•";
+            position: absolute;
+            left: 15px;
+            color: #2196f3;
+            font-weight: bold;
+            font-size: 1.5rem;
+            top: 12px;
+        }
+        
+        .command {
+            font-weight: bold;
+            color: #1565c0;
+            margin-bottom: 5px;
+        }
+        
+        .example {
+            display: block;
+            font-size: 0.9rem;
+            color: #6a1b9a;
+            background-color: #f3e5f5;
+            padding: 10px 15px;
+            border-radius: 8px;
+            margin-top: 8px;
+            font-family: 'Courier New', monospace;
+            border-left: 4px solid #9c27b0;
+            position: relative;
+        }
+        
+        .example-title {
+            display: block;
+            font-weight: bold;
+            color: #7b1fa2;
+            margin-bottom: 5px;
+            font-size: 0.85rem;
+        }
+        
+        .definition {
+            grid-column: 1 / span 2;
+            text-align: center;
+            color: #37474f;
+            margin: 20px 0;
+            padding: 20px;
+            background: linear-gradient(to right, rgba(255, 255, 255, 0.7), rgba(225, 245, 254, 0.7));
+            border-radius: 15px;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            position: relative;
+            overflow: hidden;
+            border: 2px dashed #4fc3f7;
+        }
+        
+        .definition i {
+            color: #1b5e20;
+            margin: 0 8px;
+        }
+        
+        .excel-icon {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #1b5e20 0%, #2e7d32 100%);
+            border-radius: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 2.5rem;
+            font-weight: bold;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            z-index: 10;
+        }
+        
+        .graphic-elements {
+            position: absolute;
+            opacity: 0.15;
+            z-index: 0;
+        }
+        
+        .graphic-1 {
+            top: 40%;
+            left: -30px;
+            font-size: 150px;
+            color: #2196f3;
+            transform: rotate(-15deg);
+        }
+        
+        .graphic-2 {
+            bottom: 40px;
+            right: -40px;
+            font-size: 180px;
+            color: #9c27b0;
+            transform: rotate(10deg);
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #546e7a;
+            font-size: 1rem;
+            padding: 15px;
+            background-color: rgba(255, 255, 255, 0.6);
+            border-radius: 12px;
+            font-weight: 500;
+        }
+        
+        .use-case {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 8px;
+            color: #5d4037;
+            font-size: 0.9rem;
+        }
+        
+        .use-case i {
+            color: #4caf50;
+            font-size: 1.1rem;
+        }
+        
+        @media (max-width: 768px) {
+            .content {
+                grid-template-columns: 1fr;
+            }
+            
+            .definition {
+                grid-column: 1;
+            }
+            
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .excel-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 2rem;
+            }
+            
+            .graphic-elements {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="poster">
+        <div class="excel-icon">X</div>
+        
+        <i class="fas fa-chart-bar graphic-elements graphic-1"></i>
+        <i class="fas fa-table graphic-elements graphic-2"></i>
+        
+        <div class="header">
+            <h1>Microsoft Excel</h1>
+            <p class="tagline">Comandos y funciones esenciales para el día a día</p>
+        </div>
+        
+        <div class="definition">
+            <i class="fas fa-info-circle"></i> Programa de hoja de cálculo para <strong>organizar, calcular y analizar datos</strong>. 
+            Usado en finanzas, administración y análisis de datos para <strong>automatizar tareas</strong> y generar informes.
+            <i class="fas fa-chart-line"></i>
+        </div>
+        
+        <div class="content">
+            <div class="section">
+                <h2><i class="fas fa-keyboard"></i> Comandos Básicos</h2>
+                <ul>
+                    <li>
+                        <span class="command">Ctrl + C → Copiar</span>
+                        <span class="example">
+                            <span class="example-title">CUÁNDO USAR:</span>
+                            Para duplicar fórmulas o datos entre celdas sin tener que volver a escribirlos
+                        </span>
+                        <div class="use-case">
+                            <i class="fas fa-check-circle"></i> Esencial para trabajar eficientemente
+                        </div>
+                    </li>
+                    <li>
+                        <span class="command">Ctrl + V → Pegar</span>
+                        <span class="example">
+                            <span class="example-title">CUÁNDO USAR:</span>
+                            Después de copiar, para insertar los datos en la ubicación deseada
+                        </span>
+                        <div class="use-case">
+                            <i class="fas fa-check-circle"></i> Combinación fundamental con Ctrl+C
+                        </div>
+                    </li>
+                    <li>
+                        <span class="command">Ctrl + N → Negrita</span>
+                        <span class="example">
+                            <span class="example-title">CUÁNDO USAR:</span>
+                            Para resaltar títulos o valores importantes en tus hojas de cálculo
+                        </span>
+                        <div class="use-case">
+                            <i class="fas fa-check-circle"></i> Mejora la legibilidad de los datos
+                        </div>
+                    </li>
+                    <li>
+                        <span class="command">Ctrl + K → Cursiva</span>
+                        <span class="example">
+                            <span class="example-title">CUÁNDO USAR:</span>
+                            Para dar énfasis a notas explicativas o comentarios en las celdas
+                        </span>
+                        <div class="use-case">
+                            <i class="fas fa-check-circle"></i> Útil para diferenciar tipos de texto
+                        </div>
+                    </li>
+                    <li>
+                        <span class="command">Ctrl + Z → Deshacer</span>
+                        <span class="example">
+                            <span class="example-title">CUÁNDO USAR:</span>
+                            Cuando cometes un error al editar y necesitas revertir la última acción
+                        </span>
+                        <div class="use-case">
+                            <i class="fas fa-check-circle"></i> Salvavidas ante errores comunes
+                        </div>
+                    </li>
+                    <li>
+                        <span class="command">Ctrl + H → Reemplazar</span>
+                        <span class="example">
+                            <span class="example-title">CUÁNDO USAR:</span>
+                            Para cambiar un término específico en todo el documento rápidamente
+                        </span>
+                        <div class="use-case">
+                            <i class="fas fa-check-circle"></i> Ideal para actualizaciones masivas
+                        </div>
+                    </li>
+                    <li>
+                        <span class="command">Ctrl + T → Alineación</span>
+                        <span class="example">
+                            <span class="example-title">CUÁNDO USAR:</span>
+                            Para centrar títulos o alinear números a la derecha para mejor presentación
+                        </span>
+                        <div class="use-case">
+                            <i class="fas fa-check-circle"></i> Mejora la presentación de datos
+                        </div>
+                    </li>
+                    <li>
+                        <span class="command">Ctrl + P → Imprimir</span>
+                        <span class="example">
+                            <span class="example-title">CUÁNDO USAR:</span>
+                            Cuando necesitas una copia física de tu hoja de cálculo para reuniones o archivo
+                        </span>
+                        <div class="use-case">
+                            <i class="fas fa-check-circle"></i> Fundamental para compartir información
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="section">
+                <h2><i class="fas fa-calculator"></i> Funciones Matemáticas</h2>
+                <ul>
+                    <li>
+                        <span class="command">=SUMAR() → Suma</span>
+                        <span class="example">
+                            <span class="example-title">CUÁNDO USAR:</span>
+                            Para calcular el total de ventas mensuales o gastos en un presupuesto
+                        </span>
+                        <div class="use-case">
+                            <i class="fas fa-check-circle"></i> Ejemplo: =SUMAR(A1:A10)
+                        </div>
+                    </li>
+                    <li>
+                        <span class="command">=RESTAR() → Resta</span>
+                        <span class="example">
+                            <span class="example-title">CUÁNDO USAR:</span>
+                            Para calcular diferencias entre ingresos y gastos, o variaciones entre periodos
+                        </span>
+                        <div class="use-case">
+                            <i class="fas fa-check-circle"></i> Ejemplo: =RESTAR(A1, B1)
+                        </div>
+                    </li>
+                    <li>
+                        <span class="command">=PRODUCTO() → Multiplicación</span>
+                        <span class="example">
+                            <span class="example-title">CUÁNDO USAR:</span>
+                            Para calcular el valor total de varios items con la misma cantidad y precio
+                        </span>
+                        <div class="use-case">
+                            <i class="fas fa-check-circle"></i> Ejemplo: =PRODUCTO(A1, B1)
+                        </div>
+                    </li>
+                    <li>
+                        <span class="command">=CONTAR() → Conteo</span>
+                        <span class="example">
+                            <span class="example-title">CUÁNDO USAR:</span>
+                            Para saber cuántos elementos hay en una lista o cuántas celdas contienen datos
+                        </span>
+                        <div class="use-case">
+                            <i class="fas fa-check-circle"></i> Ejemplo: =CONTAR(A1:A50)
+                        </div>
+                    </li>
+                    <li>
+                        <span class="command">=PROMEDIO() → Media</span>
+                        <span class="example">
+                            <span class="example-title">CUÁNDO USAR:</span>
+                            Para calcular la calificación promedio de estudiantes o el rendimiento medio de ventas
+                        </span>
+                        <div class="use-case">
+                            <i class="fas fa-check-circle"></i> Ejemplo: =PROMEDIO(B2:B20)
+                        </div>
+                    </li>
+                    <li>
+                        <span class="command">=COCIENTE() → División</span>
+                        <span class="example">
+                            <span class="example-title">CUÁNDO USAR:</span>
+                            Para calcular porcentajes, tasas o distribuir cantidades entre varios elementos
+                        </span>
+                        <div class="use-case">
+                            <i class="fas fa-check-circle"></i> Ejemplo: =COCIENTE(A1, B1)
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <i class="fas fa-lightbulb"></i> Domina estos comandos y funciones básicas para aumentar tu productividad en Excel
+        </div>
+    </div>
+</body>
+</html>
